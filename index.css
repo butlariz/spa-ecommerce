@@ -95,3 +95,7 @@ span.product-price {
   border-radius: 360px;
   margin-right: 5px;
 }
+
+.selected-item {
+  border: 2px solid pink
+}

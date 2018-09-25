@@ -5,6 +5,7 @@ const listItems = (productsData) => {
     let idItem = arr.itemId;
     let titleItem = arr.title;
     let imageItem = arr.galleryURL[0];
-    return createItemHtml(idItem, titleItem, imageItem);
+    let urlItem = arr.viewItemURL;
+    return createItemHtml(idItem, titleItem, imageItem, urlItem);
   });
 }

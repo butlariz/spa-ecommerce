@@ -8,17 +8,13 @@ const createItemHtml = (id, title, image, url) => {
     <span class="product-price"> $5 USD </span>
     <span class="procut-name"> ${title} </span> 
     <div class="actions">
-      <a class="btn btn-info" href="${url}"> Ver mais </a> 
-      <button class="btn btn-select" href="#" data-storeId="${idStoreItem}"> Selecionar </button> 
-      <button class="btn btn-wishlist" href="#" data-storeId="${idStoreItem}"> Wishlist </button> 
+      <button type="button" class="btn btn-info"> Ver mais </button> 
+      <button type="button" class="btn btn-select add" data-storeId="${idStoreItem}"> + Sacola </button> 
+      <button type="button" class="btn btn-wishlist add" data-storeId="${idStoreItem}"> Wishlist </button> 
     </div>
     </div>
   </div>
   `
-  $(`.btn-select[data-storeId="${id}"]`).click(function(){
-    console.log("oi")
-    $(this).parents(".item-product")[0].addClass("selected-item")
-  })
-
   $("main").append(template)
+  addButton(idStoreItem)
 }

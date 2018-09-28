@@ -1,4 +1,5 @@
 const createItemHtml = (id, title, image, url) => {
+  //Gerar novo ID. Api traz itens diferentes com o mesmo ID. 
   let idStoreItem = id + Math.floor(Math.random() * 256);
 
   let template = `

@@ -1,5 +1,4 @@
-const endpoint = "https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByCategory&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=LarizSan-spalab-PRD-ff8fe58ca-4dd43540&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&categoryId=110633&paginationInput.entriesPerPage=20&paginationInput.pageNumber=21"
-
+const endpoint = "https://api.mercadolibre.com/sites/MLB/search?category=MLB3937"
 
 // fetch('http://open.api.ebay.com/shopping?callname=FindProducts&responseencoding=JSON&appid=IDAQUI&siteid=0&version=967&QueryKeywords=harry%20potter&MaxEntries=20&paginationInput.pageNumber=1')
 // .then(response => response.json())

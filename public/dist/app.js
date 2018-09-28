@@ -1,20 +1,21 @@
 const listItems = (productsData) => {
   $("main").html("");
-  let allItems = productsData.findItemsByCategoryResponse[0].searchResult[0].item;
+  let allItems = productsData.results;
   allItems.map((arr) => {
 
-    let idItem = arr.itemId;
+    let idItem = arr.id;
     let titleItem = arr.title;
-    let imageItem = arr.galleryURL[0];
-    let urlItem = arr.viewItemURL;
+    let imageItem = arr.thumbnail;
+    let urlItem = arr.permalink;
+    let priceItem = arr.price
 
-    return createItemHtml(idItem, titleItem, imageItem, urlItem);
+    return createItemHtml(idItem, titleItem, imageItem, urlItem, priceItem);
   });
 }
-
+ 
 const addButton = (buttonID) => {
-  const button = `.btn-select[data-storeId="${buttonID}"]`
-  const divItem = `.item-product[data-storeId="${buttonID}"]`
+  const button = `.btn-select[data-id="${buttonID}"]`
+  const divItem = `.item-product[data-id="${buttonID}"]`
 
   $(button).click(function(){
     if( $(this).hasClass("add")) {

@@ -18,5 +18,4 @@ function item(id) {
   .catch(function(err) {
     console.log('Fetch Error: ', err);
   });
-  $("main").html("Esse é o produto 1. Lindo né? <a href='/'> Volte </a> ")
 }

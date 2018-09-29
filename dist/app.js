@@ -8,7 +8,7 @@ const listItems = (productsData) => {
  
 const addButton = (buttonID) => {
   const buttonSelect = `.btn-select[data-id="${buttonID}"]`
-  const divItem = `.item-product[data-id="${buttonID}"]`
+  const divItem = `.item[data-id="${buttonID}"]`
 
   $(buttonSelect).click(function(){
     if( $(this).hasClass("add")) {
@@ -26,8 +26,8 @@ const addButton = (buttonID) => {
 const addToCart = (itemID) => {
   if (typeof(Storage) !== "undefined") {
     let currentItems = localStorage.getItem("Produtos");
-
-    if (currentItems !== "null") {
+    console.log(currentItems)
+    if (currentItems !== null) {
     localStorage.setItem("Produtos", currentItems + "," + itemID);
     } else {
       localStorage.setItem("Produtos", itemID);
@@ -49,6 +49,7 @@ const removeFromCart = (itemID) => {
 }
 
 const showItemDetails = (itemData) => {
+  console.log(itemData)
   $("main").html("");
   
   let infoProduct = {
@@ -60,5 +61,6 @@ const showItemDetails = (itemData) => {
     quantity: itemData["available_quantity"]
   }
 
-  return createItemHtml(infoProduct);
-}
+  // buscar descrição fetch https://api.mercadolibre.com/items/ITEM_ID/description
+  createItemHtml(infoProduct);
+} 

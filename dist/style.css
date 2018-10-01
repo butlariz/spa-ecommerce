@@ -16,7 +16,7 @@ a {
 }
 
 nav {
-  /* background-color: #deebef; */
+  background-color: transparent;
   color: #fff;
   box-sizing: border-box;
   font-size: 1em;
@@ -27,6 +27,7 @@ nav {
   text-transform: uppercase;
   top: 0px;
   width: 100%;
+  transition: background-color 1s ease;
 }
 
 .nav {
@@ -38,6 +39,10 @@ nav {
   width: 90%;
 }
 
+.aquamarine, .page-aquamarine {
+  background-color: #deebef;
+} 
+
 .logo {
   font-size: 1.2em;
   justify-self: flex-start;
@@ -47,15 +52,15 @@ nav {
 .middle {
   margin-right: 20px;
   padding-right: 20px;
-  border-right: 1px solid #b1c5c4;
+  border-right: 1px solid #000;
 }
 
 header {
   width: 100%;
   height: 665px;
-  background: url(./images/fundo_header.jpg) no-repeat #fdfcfa;
-  background-size: 80%;
-  background-position: right top;
+  background: url(./images/fundo_header.jpg) no-repeat;
+  background-size: 100%;
+  background-position: center top;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,9 +83,22 @@ header {
 
 .search {
   width: 1000px;
-  padding: 15px;
-  margin: 50px auto;
+  margin: 100px auto 50px;
   box-sizing: border-box;
+}
+
+input#input-search {
+  border: 1px solid #000;
+  padding: 10px;
+  width: 89%;
+  margin-right: 1%;
+}
+
+button#btn-search {
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
 }
 
 .load {
@@ -136,6 +154,10 @@ main {
 
 .product-price {
   font-weight: bold;
+}
+
+.bag {
+  width: 71%;
 }
 
 .item-info {
@@ -210,4 +232,45 @@ main {
 .selected-item {
   border: 2px solid #51a2a3;
   box-shadow: 0px 0px 5px #79bfbd;
+}
+
+@media screen and (max-width: 560px) {
+  header {
+    height: 290px;
+    background-size: 150%;
+    background-position: top;
+  }
+
+  .shop-now {
+    margin-top: 30px;
+  }
+
+  .wrap {
+    width: 90%;
+  }
+
+  .search {
+    width: 90%;
+  }
+
+  input#input-search {
+    width: 75%;
+  }
+
+  .item {
+    width: 100%;
+  }
+
+  .item-single {
+    flex-direction: column;
+  }
+
+  .item-image {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .product-image {
+    margin-bottom: 30px;
+}
 }

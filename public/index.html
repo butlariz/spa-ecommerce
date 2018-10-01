@@ -5,14 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Aquamarine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" />
   <link rel="stylesheet" type="text/css" media="screen" href="./dist/style.css" />
 </head>
 <body>
   <nav> 
-    <div class="wrap"> Aquamarine acessories sacola wishlist </div>
+    <ul class="nav"> 
+      <li class="logo"><a href="/"> Aquamarine acessórios </a></li>
+      <li><a href="/bag"> <i class="fas fa-shopping-bag"></i></a></li>
+      <!-- <li class="middle"><a href="/wishlist"> <i class="fas fa-heart"></i> </a></li> -->
+    </ul>
   </nav>
-  <section class="search"> search </section>
+  <section class="search"> 
+    <form> 
+      <input type="text" id="input-search" placeholder="Faça uma busca"/>
+      <button id="btn-search"> Procurar </button>
+    </form>
+  </section>
   <main class="wrap">
     <div class="load"></div>
   </main>
@@ -23,9 +33,9 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script src="https://cdn.rawgit.com/visionmedia/page.js/master/page.js"></script>
-  <script src="./dist/mercado-livre.js"></script>
+  <script src="./dist/render.js"></script>
+  <script src="./dist/index.js"></script>
   <script src="./dist/routes.js"></script>
   <script src="./dist/app.js"></script>
-  <script src="./dist/render.js"></script>
 </body>
 </html>

@@ -1,8 +1,14 @@
 page('', index);
 page('/item/:item', item);
+page('/bag', bag)
+page('/search/:search', search)
 page();
 
 function index() {
+  nav.removeClass("page-aquamarine")
+  if ($("header").length === 0) {
+    renderHeader();
+  }
   fetch(endpoint)
   .then(response => response.json())
   .then(data => listItems(data))
@@ -12,11 +18,29 @@ function index() {
 }
 
 function item(id) {
-  fetch("https://api.mercadolibre.com/items/" + id.params.item)
+  nav.addClass("page-aquamarine")
+  fetch(callItem + id.params.item)
   .then(response => response.json())
   .then(data => showItemDetails(data))
   .catch(function(err) {
     console.log('Fetch Error: ', err);
   });
-  $("main").html("Esse é o produto 1. Lindo né? <a href='/'> Volte </a> ")
+}
+
+function bag() {
+  nav.addClass("page-aquamarine")
+  $("header").remove();
+  $("main").html("");
+  showBagItems(JSON.parse(localStorage.getItem("Produtos")));
+}
+
+function search(keyword) {
+  nav.addClass("page-aquamarine")
+  $("header").remove();
+  fetch(`https://api.mercadolibre.com/sites/MLB/search?category=MLB3937&q='${keyword}'`)
+  .then(response => response.json())
+  .then(data => listItems(data))
+  .catch(function(err) {
+    console.log('Fetch Error: ', err);
+  });
 }

@@ -1,55 +1,21 @@
 const listItems = (productsData) => {
-  $("main").html("");
+  main.html("");
   let allItems = productsData.results;
   allItems.map((arr) => {
-    return createListHtml(arr.id, arr.title, arr.thumbnail, arr.price);
+    let infoProduct = {
+      id: arr.id,
+      title: arr.title,
+      image: arr.thumbnail,
+      price: arr.price,
+    }
+    return createListHtml(infoProduct);
   });
 }
- 
-const addButton = (buttonID) => {
-  const buttonSelect = `.btn-select[data-id="${buttonID}"]`
-  const divItem = `.item-product[data-id="${buttonID}"]`
 
-  $(buttonSelect).click(function(){
-    if( $(this).hasClass("add")) {
-      $(divItem).addClass("selected-item");
-      addToCart(buttonID);
-      $(this).toggleClass("add")
-    } else {
-      $(divItem).removeClass("selected-item");
-      removeFromCart(buttonID);
-      $(this).toggleClass("add")
-    }
-  })
-}
-
-const addToCart = (itemID) => {
-  if (typeof(Storage) !== "undefined") {
-    let currentItems = localStorage.getItem("Produtos");
-
-    if (currentItems !== "null") {
-    localStorage.setItem("Produtos", currentItems + "," + itemID);
-    } else {
-      localStorage.setItem("Produtos", itemID);
-    }
-
-  } else {
-    alert("Sorry! No Web Storage support..");
-  }
-}
-
-const removeFromCart = (itemID) => {
-  console.log("bye")
-  let cartItems = localStorage.getItem("Produtos").split(",")
-  $.each(cartItems, function(index) {
-    if(itemID === cartItems[index]) {
-      cartItems.splice(index, 1)
-      }
-  });
-}
 
 const showItemDetails = (itemData) => {
-  $("main").html("");
+  $("header").remove();
+  main.html("");
   
   let infoProduct = {
     id: itemData.id,
@@ -60,5 +26,88 @@ const showItemDetails = (itemData) => {
     quantity: itemData["available_quantity"]
   }
 
-  return createItemHtml(infoProduct);
+  // buscar descrição fetch https://api.mercadolibre.com/items/ITEM_ID/description
+  createItemHtml(infoProduct);
+} 
+
+
+const selectItem = (item) => {
+  if (typeof(Storage) !== "undefined") {
+    const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+
+    if(currentItems) {
+      for (current of currentItems) {
+        if (current.id === item.id) {
+          $('.item[data-id="' + item.id + '"]').addClass("selected-item");
+        } 
+      }
+    }
+  }
+}
+
+const button = (item) => {
+  const buttonSelect = `.btn-select[data-id="${item.id}"]`
+
+  $(buttonSelect).click(function(){
+    let addOrRemove = checkBagItems(item); 
+
+    if (addOrRemove === "add") {
+      $('.item[data-id="' + item.id + '"]').addClass("selected-item");
+      addToCart(item);
+    } else if (addOrRemove === "remove") {
+      $('.item[data-id="' + item.id + '"]').removeClass("selected-item");
+      removeFromCart(item);
+    }
+  });
+
+}
+
+const checkBagItems = (item) => {
+
+  if (typeof(Storage) !== "undefined") {
+    const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+    if(currentItems) {
+
+      for (current of currentItems) {
+        if (current.id === item.id) {
+          return "remove"
+        } else {
+          return "add"
+        }
+      }
+
+      return "add"
+    } else {
+      return "add"
+    }
+
+  } else {
+      alert("Sorry! No Web Storage support..");
+  } 
+}
+
+const addToCart = (itemData) => {
+  const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+  if (currentItems) { 
+    localStorage.setItem("Produtos", JSON.stringify([...currentItems, itemData]));
+  } else {
+    localStorage.setItem("Produtos", JSON.stringify([itemData]));
+  }
+}
+
+const removeFromCart = (itemData) => { 
+  const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+  $.each(currentItems, function(index, value) {
+    if (itemData.id === value.id) {
+      var bagProducts = [...currentItems];
+      bagProducts.splice(index, 1)
+      return localStorage.setItem("Produtos", JSON.stringify(bagProducts));
+    } 
+  })
+} 
+
+const showBagItems = (products) => {
+  products.map((arr) => {
+    renderBag(arr)
+  })
 }

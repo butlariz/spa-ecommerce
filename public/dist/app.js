@@ -30,7 +30,6 @@ const showItemDetails = (itemData) => {
   createItemHtml(infoProduct);
 } 
 
-
 const selectItem = (item) => {
   if (typeof(Storage) !== "undefined") {
     const currentItems = JSON.parse(localStorage.getItem("Produtos"));
@@ -45,27 +44,60 @@ const selectItem = (item) => {
   }
 }
 
-const button = (item) => {
+const colorHeart = (item) => {
+  if (typeof(Storage) !== "undefined") {
+    const currentItems = JSON.parse(localStorage.getItem("Wishlist"));
+
+    if(currentItems) {
+      for (current of currentItems) {
+        if (current.id === item.id) {
+          $('.btn-wishlist[data-id="' + item.id + '"]').addClass("heart-red");
+        } 
+      }
+    }
+  }
+}
+
+const bagButton = (item) => {
   const buttonSelect = `.btn-select[data-id="${item.id}"]`
 
   $(buttonSelect).click(function(){
-    let addOrRemove = checkBagItems(item); 
+    let addOrRemove = checkBagItems(item, "Produtos"); 
 
     if (addOrRemove === "add") {
       $('.item[data-id="' + item.id + '"]').addClass("selected-item");
-      addToCart(item);
+      addToCart(item, "Produtos");
     } else if (addOrRemove === "remove") {
       $('.item[data-id="' + item.id + '"]').removeClass("selected-item");
-      removeFromCart(item);
+      removeFromCart(item, "Produtos");
     }
   });
 
+  selectItem(item)
 }
 
-const checkBagItems = (item) => {
+const wishlistButton = (item) => {
+  const buttonWishlist = `.btn-wishlist[data-id="${item.id}"]`
+
+  $(buttonWishlist).click(function(){
+    let addOrRemove = checkBagItems(item, "Wishlist"); 
+
+    if (addOrRemove === "add") {
+      $(this).addClass("heart-red");
+      addToCart(item, "Wishlist");
+    } else if (addOrRemove === "remove") {
+      $(this).removeClass("heart-red");
+      removeFromCart(item, "Wishlist");
+    }
+  });
+
+  colorHeart(item)
+}
+
+const checkBagItems = (item, key) => {
 
   if (typeof(Storage) !== "undefined") {
-    const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+    const currentItems = JSON.parse(localStorage.getItem(key));
     if(currentItems) {
 
       for (current of currentItems) {
@@ -86,22 +118,22 @@ const checkBagItems = (item) => {
   } 
 }
 
-const addToCart = (itemData) => {
-  const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+const addToCart = (itemData, key) => {
+  const currentItems = JSON.parse(localStorage.getItem(key));
   if (currentItems) { 
-    localStorage.setItem("Produtos", JSON.stringify([...currentItems, itemData]));
+    localStorage.setItem(key, JSON.stringify([...currentItems, itemData]));
   } else {
-    localStorage.setItem("Produtos", JSON.stringify([itemData]));
+    localStorage.setItem(key, JSON.stringify([itemData]));
   }
 }
 
-const removeFromCart = (itemData) => { 
-  const currentItems = JSON.parse(localStorage.getItem("Produtos"));
+const removeFromCart = (itemData, key) => { 
+  const currentItems = JSON.parse(localStorage.getItem(key));
   $.each(currentItems, function(index, value) {
     if (itemData.id === value.id) {
       var bagProducts = [...currentItems];
       bagProducts.splice(index, 1)
-      return localStorage.setItem("Produtos", JSON.stringify(bagProducts));
+      return localStorage.setItem(key, JSON.stringify(bagProducts));
     } 
   })
 } 

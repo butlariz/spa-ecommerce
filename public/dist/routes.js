@@ -1,6 +1,7 @@
 page('', index);
 page('/item/:item', item);
 page('/bag', bag)
+page('/wishlist', wishlist)
 page('/search/:search', search)
 page();
 
@@ -32,6 +33,13 @@ function bag() {
   $("header").remove();
   $("main").html("");
   showBagItems(JSON.parse(localStorage.getItem("Produtos")));
+}
+
+function wishlist() {
+  nav.addClass("page-aquamarine")
+  $("header").remove();
+  $("main").html("");
+  showBagItems(JSON.parse(localStorage.getItem("Wishlist")));
 }
 
 function search(keyword) {

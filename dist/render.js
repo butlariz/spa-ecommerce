@@ -23,8 +23,8 @@ const createListHtml = (product) => {
   </div>
   `
   main.append(template)
-  selectItem(product)
-  button(product)
+  bagButton(product)
+  wishlistButton(product)
 
   if (main.text().length < 1) {
     main.html("Desculpe, não há nada aqui")
@@ -47,7 +47,8 @@ const createItemHtml = (product) => {
   </div>
   `
   main.append(template)
-  button(product)
+  bagButton(product)
+  wishlistButton(product)
 
   if (main.text().length < 1) {
     main.html("Desculpe, não há nada aqui")
@@ -71,6 +72,6 @@ const renderBag = (product) => {
   </div>
   `
   main.append(template)
-  selectItem(product)
-  button(product)
+  bagButton(product)
+  wishlistButton(product)
 }

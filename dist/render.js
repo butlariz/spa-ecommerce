@@ -62,7 +62,7 @@ const renderBag = (product) => {
     <div class="product-info bag">
     <span class="product-price"> ${product.price} BRL </span>
     <span class="procut-name"> ${product.title} </span> 
-    <a href="/${product.url}" class="item-url"> Finalizar compra no site </a> 
+    <a href="${product.url}" class="item-url"> Finalizar compra no site </a> 
     <div class="actions actions-list">
       <a href="/item/${product.id}" class="btn btn-info">Ver mais</a> 
       <button type="button" class="btn btn-select add" data-id="${product.id}"><i class="fas fa-shopping-bag"></i> Sacola</button> 
